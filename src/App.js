@@ -10,13 +10,31 @@ import jsonServerProvider from 'ra-data-json-server';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
+import red from '@material-ui/core/colors/red';
+
+
 const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
 
+
+//スタイルテーマを追加
+const theme = createMuiTheme({
+    palette: {
+        primary: { main: purple[200] }, // Hueを入れる場合は{ main: }内で定義
+        secondary: red,
+    },
+    typography: {
+        fontSize: 15, // フォントサイズ変更
+    }
+});
+
 const App = () => (
-    <Admin dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+    <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
       {/*<Resource name="posts" list={ListGuesser} />*/}
       {/*<Resource name="posts" list={PostList} />*/}
-      <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
+      {/*ラベル名変更の場合は"option"を使用*/}
+      <Resource name="posts" options={{ label: 'Posts' }} list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
       <Resource name="users" list={UserList} icon={UserIcon} />
     </Admin>
 );
