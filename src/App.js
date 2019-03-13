@@ -30,13 +30,19 @@ const theme = createMuiTheme({
 });
 
 const App = () => (
+
+    <div>
     <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
       {/*<Resource name="posts" list={ListGuesser} />*/}
       {/*<Resource name="posts" list={PostList} />*/}
       {/*ラベル名変更の場合は"option"を使用*/}
       <Resource name="posts" options={{ label: 'Posts' }} list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon} />
       <Resource name="users" list={UserList} icon={UserIcon} />
+      <button>
+          Click Here
+      </button>
     </Admin>
+    </div>
 );
 
 export default App;
